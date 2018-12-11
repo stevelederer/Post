@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" textLabel="D6f-IY-eRC" detailTextLabel="UNq-sZ-EQg" style="IBUITableViewCellStyleSubtitle" id="vp2-dX-Ge1">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" textLabel="D6f-IY-eRC" detailTextLabel="UNq-sZ-EQg" style="IBUITableViewCellStyleSubtitle" id="vp2-dX-Ge1">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vp2-dX-Ge1" id="67Y-Th-2dg">
@@ -62,7 +62,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Posts" id="zYe-oE-vKe"/>
+                    <navigationItem key="navigationItem" title="Posts" id="zYe-oE-vKe">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0NG-QA-hXt">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="DCU-7I-xmM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="b4y-Yf-60T" id="VG1-zx-Sqe"/>
                     </connections>

@@ -57,6 +57,36 @@ class PostListViewController: UIViewController, UITableViewDataSource, UITableVi
             self.tableView.reloadData()
         }
     }
+    // alert controller to create new post
+    func presentNewPostAlert() {
+        let newPostAlertController = UIAlertController(title: "Add Post", message: "Enter information here:", preferredStyle: .alert)
+        newPostAlertController.addTextField { (usernameTextField) in
+            usernameTextField.placeholder = "Enter Username"
+        }
+        newPostAlertController.addTextField { (messageTextField) in
+            messageTextField.placeholder = "Enter Message..."
+        }
+        
+        let postAction = UIAlertAction(title: "Post", style: .default) { (postAction) in
+            guard let username = newPostAlertController.textFields?.first?.text, !username.isEmpty, let text = newPostAlertController.textFields?[1].text, !text.isEmpty else { self.presentErrorAlert() ; return }
+            PostController.addNewPostWith(username: username, text: text, completion: {
+                self.reloadTableView()
+            })
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        newPostAlertController.addAction(postAction)
+        newPostAlertController.addAction(cancelAction)
+        
+        self.present(newPostAlertController, animated: true, completion: nil)
+    }
+    
+    func presentErrorAlert() {
+        let errorAlertController = UIAlertController(title: "User is missing information", message: "Please try again", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        errorAlertController.addAction(okAction)
+        self.present(errorAlertController, animated: true, completion: nil)
+    }
     
     // MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,4 +102,8 @@ class PostListViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    // MARK: - Actions
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        presentNewPostAlert()
+    }
 }
