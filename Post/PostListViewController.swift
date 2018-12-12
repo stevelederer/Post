@@ -12,7 +12,7 @@ class PostListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     // MARK: - Properties
-    let postController = PostController()
+    //    let postController = PostController()
     
     var refreshControl = UIRefreshControl()
     
@@ -105,5 +105,25 @@ class PostListViewController: UIViewController, UITableViewDataSource, UITableVi
     // MARK: - Actions
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         presentNewPostAlert()
+    }
+}
+
+extension PostListViewController {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row >= (PostController.posts.count - 1) {
+            let preFetchCount = PostController.posts.count
+            
+            PostController.fetchPosts(reset: false) {
+                let postFetchCount = PostController.posts.count
+                
+                if preFetchCount == postFetchCount {
+                    
+                } else {
+                    PostController.fetchPosts(reset: false) {
+                        self.reloadTableView()
+                    }
+                }
+            }
+        }
     }
 }

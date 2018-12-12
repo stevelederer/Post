@@ -9,13 +9,20 @@
 import Foundation
 
 struct Post: Codable {
+    // MARK: - Properties
     let text: String
     let timestamp: TimeInterval
     let username: String
     
+    // MARK: - Memberwise initializer
     init(text: String, timestamp: TimeInterval = Date().timeIntervalSince1970, username: String) {
         self.text = text
         self.timestamp = timestamp
         self.username = username
+    }
+    
+    //computed property queryTimestamp
+    var queryTimestamp: TimeInterval {
+        return self.timestamp - 0.00001
     }
 }
